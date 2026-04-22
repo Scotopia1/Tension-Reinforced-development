@@ -1,0 +1,8 @@
+{
+  "count": 150,
+  "pattern": "/frames/hero/{i}.jpeg",
+  "width": 1280,
+  "height": 720,
+  "fps": 30,
+  "source": "TRD-Remotion/HeroTensioning"
+}

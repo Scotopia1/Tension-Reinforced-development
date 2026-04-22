@@ -1,0 +1,14 @@
+import type { NextConfig } from "next";
+import path from "node:path";
+
+const nextConfig: NextConfig = {
+  images: {
+    formats: ["image/avif", "image/webp"],
+  },
+  transpilePackages: ["three"],
+  turbopack: {
+    root: path.resolve(__dirname),
+  },
+};
+
+export default nextConfig;

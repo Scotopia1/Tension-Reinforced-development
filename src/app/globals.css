@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+@theme {
+  --color-dark: #0A0A0A;
+  --color-dark-surface: #141414;
+  --color-dark-elevated: #1A1A1A;
+  --color-dark-card: #111111;
+  --color-dark-border: #2A2A2A;
+  --color-concrete: #3A3A3A;
+
+  --color-amber: #D4A537;
+  --color-amber-hover: #E5B84A;
+  --color-amber-muted: #D4A53726;
+  --color-amber-glow: #D4A53780;
+
+  --color-rust: #8B3A1F;
+  --color-rust-hover: #A8482A;
+
+  --color-cream: #F5F0EB;
+  --color-steel: #9CA3AF;
+  --color-ash: #6B7280;
+  --color-bone: #E8E0D6;
+
+  --font-display: var(--font-anton);
+  --font-body: var(--font-inter-tight);
+  --font-mono: var(--font-jetbrains);
+}
+
+:root {
+  --bg: #0A0A0A;
+  --accent: #D4A537;
+  --scroll-skew: 0;
+  --scroll-vel: 0;
+}
+
+@layer base {
+  html {
+    scroll-behavior: auto; /* GSAP / Lenis own scroll */
+  }
+
+  html,
+  body {
+    background: var(--bg, var(--color-dark));
+    color: var(--color-cream);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-family: var(--font-body), system-ui, sans-serif;
+    overflow-x: hidden;
+    font-feature-settings: "ss01", "cv11";
+    letter-spacing: -0.005em;
+  }
+
+  ::selection {
+    background-color: rgba(212, 165, 55, 0.3);
+    color: var(--color-cream);
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-dark);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-dark-border);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-amber);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display), sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.005em;
+    line-height: 0.92;
+    font-weight: 400;
+  }
+}
+
+@layer utilities {
+  .font-display { font-family: var(--font-display), sans-serif; }
+  .font-mono { font-family: var(--font-mono), ui-monospace, monospace; }
+
+  /* Mask reveal helper used by SplitText / RevealText */
+  .mask-reveal { overflow: hidden; display: inline-block; }
+  .mask-reveal > * { display: inline-block; will-change: transform; }
+
+  /* Grain overlay (used in CTA + Team) */
+  .grain {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.06;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* Hide scrollbar utility */
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+}
+
+@layer base {
+  /* Magnetic cursor / anchor focus */
+  button:focus-visible, a:focus-visible {
+    outline: 2px solid var(--color-amber);
+    outline-offset: 4px;
+  }
+}
+
+/* Reduced motion override — applies to all CSS transitions */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
